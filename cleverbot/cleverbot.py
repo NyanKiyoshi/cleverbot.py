@@ -101,14 +101,14 @@ class Cleverbot(object):
         # Add the current question to the conversation log
         self.conversation.append(question)
 
-        parsed = self._parse(resp.text)
+        parsed = self._parse(resp.content.decode('utf-8'))
 
         # Set data as appropriate
         if self.data['sessionid'] != '':
             self.data['sessionid'] = parsed['conversation_id']
 
         # Add Cleverbot's reply to the conversation log
-        self.conversation.append(parsed['answer'])
+        self.conversation.append(parsed['answer'].encode('utf-8'))
 
         return parsed['answer']
 
